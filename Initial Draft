@@ -1,0 +1,29 @@
+1. The Edge Layer (Data Acquisition & Transmission)
+The architecture begins inside the vehicle. The goal here is to extract, format, and securely transmit the raw diagnostic data.
+
+Hardware Interfacing: An ELM327 OBD-II adapter requests specific PIDs over the vehicle's CAN bus. An edge microcontroller, such as an ESP32, interfaces directly with this adapter.
+
+Firmware Execution: Utilizing hardware peripherals like UART and DMA allows for efficient, non-blocking data reads at the required 1-10Hz sampling rate.
+
+Transmission: The C/C++ firmware packages these readings into JSON payloads. It then publishes this data to the cloud using a lightweight, secure IoT communication stack (MQTTS). MQTT is critical here because it is designed to handle the inevitable dropouts of cellular network connections.
+
+2. The Ingestion Layer (MQTT & Kafka)
+To answer your question directly: Yes, you should use Kafka, but alongside MQTT, not as a replacement for it. They serve two different functions in a modern IoT pipeline.
+
+MQTT Broker (The Gatekeeper): The cloud infrastructure exposes an MQTT Broker (like EMQX or Mosquitto). This broker handles the thousands of concurrent, lightweight connections from your edge devices.
+
+Apache Kafka (The Internal Buffer): An MQTT-to-Kafka connector bridges the data. Kafka acts as the central nervous system for your backend. It reliably buffers the massive stream of incoming telemetry. By using Kafka, you decouple your ingestion layer from your database and AI models. If your database goes down for maintenance, Kafka holds the data, ensuring zero packet loss.
+
+3. The Processing & Storage Layer (The Database)
+Because you are dealing with high-frequency, time-stamped data, standard relational databases will quickly become a bottleneck. You will need a specific buffering and storage strategy.
+
+Stream Processing: Worker nodes—deployed as containerized microservices managed via Docker and Kubernetes—subscribe to the Kafka topics. These services process the raw JSON on the fly, applying the moving average filters and linear interpolation mentioned in your proposal.
+
+Time-Series Database (TSDB): The cleaned data is continuously written to a Time-Series Database like InfluxDB or TimescaleDB. These databases are highly optimized for sequential time data, allowing your AI models and frontend dashboards to query historical trends (like RPM spikes over the last 30 days) in milliseconds.
+
+4. The Intelligence & Application Layer
+This is where the processed data is turned into actionable insights for the fleet manager.
+
+AI Inference Engine: Dedicated Python services fetch the normalized data. They run the Isolation Forest model to flag immediate anomalies and the LSTM networks to forecast the Remaining Useful Life (RUL) of vehicle components. The resulting "Health Score" is published back to Kafka or directly to the database.
+
+Backend API & Frontend: A RESTful or WebSocket API serves these insights to a React or Angular frontend. The frontend visualizes the health scores on a live fleet map and triggers the automated maintenance alerts.
