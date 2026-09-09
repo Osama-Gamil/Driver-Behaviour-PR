@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  emqx:
+    image: emqx/emqx:latest
+    container_name: emqx_broker
+    ports:
+      - "1883:1883"     # MQTT client port
+      - "18083:18083"   # EMQX Dashboard
+    environment:
+      # Pre-configures EMQX Data Integration connector to Kafka
+      - EMQX_CONNECTORS__KAFKA__DEFAULT__BOOTSTRAP_HOSTS=kafka_broker:9092
+    networks:
+      - iot-net
+
+  kafka:
+    image: apache/kafka:latest
+    container_name: kafka_broker
+    ports:
+      - "9092:9092"     # For host access
+    environment:
+      # KRaft mode configs for single-node setup / to elminate the kafka zookeeper 
+      # node ID  = 1
+      #this define the role of the node,
+      #broker for sending and receiving data and topics, partions
+      #controller for metadata and nodes managing
+      # plaintext means the data is unencrypted, 0.0.0.0 to accept any incoming traffic from IP4 network interface for Kafka from Docker or machine 
+      #PLAINTEXT:9092
+      # Opens port 9092 for standard traffic from your producers and consumers. PLAINTEXT means the data is sent unencrypted.
+      # (CONTROLLER://:9093)
+      #Opens port 9093 specifically for internal cluster management.
+      KAFKA_NODE_ID: 1 
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      # Internal listeners advertise kafka_broker:9092 to emqx & kafka-ui
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka_broker:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka_broker:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CLUSTER_ID: "4L6g3nShT-eMCtK--X86sw"
+    networks:
+      - iot-net
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka_ui
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      # Updated to match kafka_broker
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka_broker:9092
+    depends_on:
+      - kafka
+    networks:
+      - iot-net
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    container_name: timescaledb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: telemetry
+      POSTGRES_USER: iot
+      POSTGRES_PASSWORD: password
+    volumes:
+      - tsdb-data:/var/lib/postgresql/data
+    networks:
+      - iot-net
+
+networks:
+  iot-net:
+    driver: bridge
+volumes:
+  tsdb-data:
