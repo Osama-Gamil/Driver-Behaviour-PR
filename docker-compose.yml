@@ -1,15 +1,16 @@
-version: '3.8'
-
 services:
   emqx:
     image: emqx/emqx:latest
     container_name: emqx_broker
     ports:
       - "1883:1883"     # MQTT client port
-      - "18083:18083"   # EMQX Dashboard
-    environment:
-      # Pre-configures EMQX Data Integration connector to Kafka
-      - EMQX_CONNECTORS__KAFKA__DEFAULT__BOOTSTRAP_HOSTS=kafka_broker:9092
+      - "18083:18083"   # EMQX Dashboard (admin / public)
+    healthcheck:
+      # Reports healthy only once the broker is actually accepting connections
+      test: ["CMD", "/opt/emqx/bin/emqx", "ctl", "status"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
     networks:
       - iot-net
 
@@ -17,31 +18,47 @@ services:
     image: apache/kafka:latest
     container_name: kafka_broker
     ports:
-      - "9092:9092"     # For host access
+      - "9092:9092"     # internal listener (other containers)
+      - "29092:29092"   # external listener (Python on Windows)
     environment:
-      # KRaft mode configs for single-node setup / to elminate the kafka zookeeper 
-      # node ID  = 1
-      #this define the role of the node,
-      #broker for sending and receiving data and topics, partions
-      #controller for metadata and nodes managing
-      # plaintext means the data is unencrypted, 0.0.0.0 to accept any incoming traffic from IP4 network interface for Kafka from Docker or machine 
-      #PLAINTEXT:9092
-      # Opens port 9092 for standard traffic from your producers and consumers. PLAINTEXT means the data is sent unencrypted.
-      # (CONTROLLER://:9093)
-      #Opens port 9093 specifically for internal cluster management.
-      KAFKA_NODE_ID: 1 
+      KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
-      # Internal listeners advertise kafka_broker:9092 to emqx & kafka-ui
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka_broker:9092
+
+      # Three listeners:
+      #   INTERNAL  - used by containers on iot-net (kafka-ui)
+      #   EXTERNAL  - used by programs on your Windows machine
+      #   CONTROLLER- internal KRaft cluster management only
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,EXTERNAL://0.0.0.0:29092,CONTROLLER://0.0.0.0:9093
+
+      # What Kafka TELLS clients to reconnect to. This is the part that matters:
+      # containers get the container name, host programs get localhost.
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka_broker:9092,EXTERNAL://localhost:29092
+
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka_broker:9093
+
+      # Single-node settings: no replicas available, so everything is 1
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_CLUSTER_ID: "4L6g3nShT-eMCtK--X86sw"
+
+      # Let the bridge create 'vehicle-telemetry' on first publish
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_NUM_PARTITIONS: 3
+
+      # Keep messages across restarts
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      CLUSTER_ID: "4L6g3nShT-eMCtK--X86sw"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
     networks:
       - iot-net
 
@@ -52,12 +69,14 @@ services:
       - "8080:8080"
     environment:
       KAFKA_CLUSTERS_0_NAME: local
-      # Updated to match kafka_broker
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka_broker:9092
+      DYNAMIC_CONFIG_ENABLED: "true"
     depends_on:
-      - kafka
+      kafka:
+        condition: service_healthy
     networks:
       - iot-net
+
   timescaledb:
     image: timescale/timescaledb:latest-pg16
     container_name: timescaledb
@@ -69,11 +88,20 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - tsdb-data:/var/lib/postgresql/data
+      # Any .sql file dropped in here runs once, the first time the DB is created
+      - ./db-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U iot -d telemetry"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
     networks:
       - iot-net
 
 networks:
   iot-net:
     driver: bridge
+
 volumes:
   tsdb-data:
+  kafka-data:
