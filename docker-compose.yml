@@ -81,7 +81,10 @@ services:
     image: timescale/timescaledb:latest-pg16
     container_name: timescaledb
     ports:
-      - "5432:5432"
+      # Host port shifted to 5433: a native Postgres install on this machine
+      # already owns 5432, and TCP connections to localhost:5432 were
+      # silently landing on that instead of this container.
+      - "5433:5432"
     environment:
       POSTGRES_DB: telemetry
       POSTGRES_USER: iot

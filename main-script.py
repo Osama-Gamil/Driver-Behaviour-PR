@@ -24,10 +24,11 @@
 """
 Starts the whole system:
   1. Docker containers (EMQX, Kafka, Kafka UI, TimescaleDB)
-  2. Waits until EMQX and Kafka actually accept connections
+  2. Waits until EMQX, Kafka, and TimescaleDB actually accept connections
   3. Starts the MQTT -> Kafka bridge
-  4. Starts the vehicle simulator
-  5. Tears everything down on exit, no matter how we exit
+  4. Starts the Kafka -> TimescaleDB consumer
+  5. Starts the vehicle simulator
+  6. Tears everything down on exit, no matter how we exit
 """
 
 import socket
@@ -43,6 +44,7 @@ script_dir = Path(__file__).resolve().parent
 PYTHON = sys.executable
 
 BRIDGE_SCRIPT = script_dir / "python-client" / "mqtt_kafka_bridge.py"
+DB_CONSUMER_SCRIPT = script_dir / "python-client" / "kafka_db_consumer.py"
 CLIENT_SCRIPT = script_dir / "python-client" / "single-client.py"
 
 
@@ -74,6 +76,7 @@ def stop_infrastructure():
 
 def main():
     bridge = None
+    db_consumer = None
     try:
         start_infrastructure()
 
@@ -83,6 +86,8 @@ def main():
         if not wait_for_port("localhost", 1883, "EMQX"):
             return
         if not wait_for_port("localhost", 29092, "Kafka"):
+            return
+        if not wait_for_port("localhost", 5433, "TimescaleDB"):
             return
 
         # Bridge starts BEFORE the vehicles. MQTT does not replay history,
@@ -95,6 +100,18 @@ def main():
             print("Bridge exited immediately. Check its output above.")
             return
 
+        # DB consumer also starts before the vehicles, same reasoning: it's a
+        # Kafka consumer group, so anything produced before it joins just
+        # waits in the topic (unlike MQTT) - but starting early keeps startup
+        # order predictable and surfaces DB connection failures immediately.
+        print("Starting Kafka -> TimescaleDB consumer...")
+        db_consumer = subprocess.Popen([PYTHON, str(DB_CONSUMER_SCRIPT)], cwd=script_dir)
+        time.sleep(3)
+
+        if db_consumer.poll() is not None:
+            print("DB consumer exited immediately. Check its output above.")
+            return
+
         print("Starting OBD client...\n")
         subprocess.run([PYTHON, str(CLIENT_SCRIPT)], cwd=script_dir, check=False)
 
@@ -105,13 +122,14 @@ def main():
     finally:
         # 'finally' means this runs on Ctrl+C, on crash, and on normal exit.
         # Without it, containers keep running after the script dies.
-        if bridge is not None and bridge.poll() is None:
-            print("Stopping bridge...")
-            bridge.terminate()
-            try:
-                bridge.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                bridge.kill()
+        for name, proc in (("DB consumer", db_consumer), ("bridge", bridge)):
+            if proc is not None and proc.poll() is None:
+                print(f"Stopping {name}...")
+                proc.terminate()
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    proc.kill()
         stop_infrastructure()
         print("Done.")
 

@@ -1,1 +1,3 @@
-pip install paho-mqtt
+paho-mqtt
+kafka-python
+psycopg2-binary
