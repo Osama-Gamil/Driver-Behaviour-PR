@@ -1,0 +1,74 @@
+<style>:root{--border:#ccc;--surface-1:#fff;--text-secondary:#555}.c-gray rect{fill:#f8f8f8;stroke:#666}.c-teal rect{fill:#5DCAA5}.c-purple rect{fill:#AFA9EC}.c-coral rect{fill:#F0997B}.c-pink rect{fill:#ED93B1}.th{font-family:Arial;font-weight:bold;fill:#111}.ts{font-family:Arial;fill:#333}.arr{stroke:#666;stroke-width:2}</style><h2 class="sr-only">A zoomable, pannable board showing all components of the driver behaviour and vehicle health platform, grouped into vehicle, edge gateway, communication, cloud data plane, AI, applications, platform operations, security and observability.</h2>
+<div style="display:flex;align-items:center;gap:8px;margin:0 0 10px">
+  <button id="zin" aria-label="Zoom in" style="width:34px">+</button>
+  <button id="zout" aria-label="Zoom out" style="width:34px">−</button>
+  <button id="zfit">Fit</button>
+  <button id="z100">100%</button>
+  <span id="zlab" style="font-size:13px;color:var(--text-secondary);margin-left:auto"></span>
+</div>
+<div id="wrap" style="border:0.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:grab;background:var(--surface-1)">
+  <svg id="board" width="100%" height="520" viewBox="0 0 680 520">
+    <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+    <g id="vp"></g>
+  </svg>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:14px;margin:10px 0 0;font-size:12px;color:var(--text-secondary)">
+  <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#5DCAA5;margin-right:5px"></span>Vehicle and edge</span>
+  <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#AFA9EC;margin-right:5px"></span>Cloud data plane</span>
+  <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#F0997B;margin-right:5px"></span>Analytics and apps</span>
+  <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#ED93B1;margin-right:5px"></span>Cross-cutting: security, ops</span>
+</div>
+<script>
+const G=[
+{t:"Vehicle",x:40,y:40,c:"c-teal",n:[["ECM","Engine control module"],["TCM","Transmission control"],["ABS / ESC","Braking and stability"],["BCM","Body control module"],["CAN bus","ISO 11898 differential pair"],["OBD-II port","SAE J1962 connector"],["GNSS receiver","Position, speed, heading"]]},
+{t:"Edge gateway",x:40,y:542,c:"c-teal",n:[["Device manager","Boot, watchdog, supervision"],["CAN reader","SocketCAN frame capture"],["OBD parser","SAE J1979 decoding"],["Local cache","Offline store and forward"],["Local database","Encrypted SQLite"],["Edge AI","TinyML anomaly detection"],["Local event detector","Rule-based harsh events"],["Device configuration","Remote tunable thresholds"],["OTA update agent","Signed A/B partition swap"],["Secure cert storage","Secure element or TPM"],["Encryption module","AES-256 and TLS 1.3"],["Retry and backoff","Exponential backoff with jitter"],["Data compression","Protobuf plus gzip"],["Device logging","Structured logs, PII scrubbed"]]},
+{t:"Communication",x:380,y:40,c:"c-purple",n:[["MQTT 5 over TLS","Device telemetry uplink"],["HTTPS REST","Client request-response"],["WebSocket","Live dashboard push"],["gRPC","Internal service calls"],["API gateway","Auth, rate limiting, routing"],["Load balancer","L4 MQTT, L7 HTTPS"],["Ingress proxy","Host and path routing"]]},
+{t:"Ingestion",x:380,y:542,c:"c-purple",n:[["MQTT broker","Sessions, QoS, topic ACLs"],["Device registry","Device twin and provisioning"],["Identity service","OIDC token issuance"]]},
+{t:"Security",x:380,y:804,c:"c-pink",n:[["mTLS with X.509","Device and service identity"],["OAuth2 and OIDC","Human user authentication"],["RBAC and ABAC","Fleet-scoped authorisation"],["Secure boot","Verified firmware chain"],["KMS encryption","Envelope encryption at rest"],["Audit log","Append-only privileged actions"]]},
+{t:"Messaging backbone",x:720,y:40,c:"c-purple",n:[["Kafka","Partitioned by VIN"],["RabbitMQ","Task and command queues"],["Redis","Cache, sessions, pub-sub"],["Background workers","Async job execution"],["Scheduler","Cron and batch triggers"]]},
+{t:"Processing pipeline",x:720,y:422,c:"c-purple",n:[["Raw ingestion","Decompress and deserialize"],["Validation","Schema, VIN, clock skew"],["Cleaning","Duplicates and sensor spikes"],["Filtering","Per-PID range quarantine"],["Normalization","SI units and scaling"],["Feature engineering","Jerk, deltas, rolling stats"],["Window aggregation","1 s, 1 min, per-trip"],["Rule engine","Explainable safety thresholds"]]},
+{t:"Analytics",x:720,y:984,c:"c-coral",n:[["Harsh event detection","Brake, accel, turn"],["Overspeed and idle","Limit and dwell breaches"],["Driver score","Weighted trip composite"],["Daily fleet report","Distance, fuel, alerts"],["Driver report job","Rolling score trends"],["Trend analysis","Month-over-month KPIs"]]},
+{t:"Storage",x:1060,y:40,c:"c-purple",n:[["PostgreSQL","Vehicles, drivers, fleets"],["TimescaleDB","Telemetry hypertables"],["MongoDB","Trips, alerts, AI results"],["Redis cache","Hot state and fan-out"],["Elasticsearch","Log and DTC search"],["Object storage","Models, reports, data lake"]]},
+{t:"AI plane",x:1060,y:482,c:"c-purple",n:[["Feature store","Shared train and serve logic"],["Training pipeline","Airflow or Kubeflow DAG"],["Experiment tracking","MLflow runs and metrics"],["Model registry","Versioned, staged, signed"],["Online inference","KServe under 200 ms"],["Batch inference","Nightly RUL on Spark"],["Model monitoring","Drift and accuracy decay"]]},
+{t:"Applications",x:1400,y:40,c:"c-coral",n:[["Fleet dashboard","Live map and alerts"],["Admin dashboard","Users, devices, orgs"],["Driver dashboard","Personal score and trips"],["Vehicle dashboard","Telemetry, DTCs, RUL"],["Mobile app","Push alerts on the go"],["REST API","Versioned public endpoints"],["WebSocket gateway","Session fan-out"],["Notification service","Push, email, SMS"]]},
+{t:"Platform operations",x:1400,y:602,c:"c-pink",n:[["Kubernetes","Orchestration and autoscaling"],["Helm","Templated releases"],["Container registry","Signed, scanned images"],["CI pipeline","Lint, test, build, scan"],["ArgoCD","GitOps reconciliation"],["Terraform","Infrastructure as code"],["Secrets manager","Dynamic short-lived credentials"]]},
+{t:"Observability",x:1400,y:1104,c:"c-pink",n:[["Prometheus","Metrics scraping"],["Grafana","SLO dashboards"],["Jaeger or Tempo","Distributed tracing"],["OpenTelemetry","Unified instrumentation"],["Fluent Bit","Log shipping"]]}];
+const A=["M185 512V538","M330 988H355V300H378","M525 512V538","M670 658H695V216H718","M865 392V418","M1010 600H1035V246H1058","M1010 760H1045V718H1058","M865 954V980","M1350 718H1375V306H1398","M1010 1190H1385V500H1398"];
+const NS="http://www.w3.org/2000/svg";
+function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+const vp=document.getElementById("vp");
+G.forEach(g=>{
+ const h=44+g.n.length*60+8;
+ const gc=el("g",{class:"c-gray"});
+ gc.appendChild(el("rect",{x:g.x,y:g.y,width:290,height:h,rx:16,"stroke-width":0.5}));
+ const lb=el("text",{class:"th",x:g.x+16,y:g.y+28,style:"font-size:19px"});lb.textContent=g.t;gc.appendChild(lb);
+ vp.appendChild(gc);
+ g.n.forEach((n,i)=>{
+  const y=g.y+44+i*60;
+  const nd=el("g",{class:"node "+g.c});
+  nd.setAttribute("onclick","sendPrompt('In the vehicle telemetry architecture, explain the "+n[0]+" component in detail')");
+  nd.appendChild(el("rect",{x:g.x+16,y:y,width:258,height:52,rx:8,"stroke-width":0.5}));
+  const t1=el("text",{class:"th",x:g.x+30,y:y+21,style:"font-size:19px"});t1.textContent=n[0];nd.appendChild(t1);
+  const t2=el("text",{class:"ts",x:g.x+30,y:y+40,style:"font-size:14px"});t2.textContent=n[1];nd.appendChild(t2);
+  vp.appendChild(nd);
+ });
+});
+A.forEach(d=>vp.appendChild(el("path",{d:d,fill:"none",class:"arr","marker-end":"url(#arrow)"})));
+let k=0.35,tx=0,ty=0;
+const lab=document.getElementById("zlab"),wrap=document.getElementById("wrap"),svg=document.getElementById("board");
+function apply(){vp.setAttribute("transform","translate("+tx+","+ty+") scale("+k+")");lab.textContent=Math.round(k*100)+"%";}
+function fit(){const w=wrap.clientWidth||680;svg.setAttribute("viewBox","0 0 "+w+" 520");k=Math.min(w/1730,520/1496);tx=(w-1730*k)/2;ty=(520-1496*k)/2;apply();}
+function zoomAt(px,py,f){const nk=Math.max(0.15,Math.min(2.5,k*f));f=nk/k;tx=px-(px-tx)*f;ty=py-(py-ty)*f;k=nk;apply();}
+svg.addEventListener("wheel",e=>{e.preventDefault();const r=svg.getBoundingClientRect();zoomAt(e.clientX-r.left,e.clientY-r.top,e.deltaY<0?1.12:1/1.12);},{passive:false});
+let dr=false,sx=0,sy=0,moved=0;
+svg.addEventListener("pointerdown",e=>{dr=true;moved=0;sx=e.clientX-tx;sy=e.clientY-ty;wrap.style.cursor="grabbing";svg.setPointerCapture(e.pointerId);});
+svg.addEventListener("pointermove",e=>{if(!dr)return;moved++;tx=e.clientX-sx;ty=e.clientY-sy;apply();});
+svg.addEventListener("pointerup",e=>{dr=false;wrap.style.cursor="grab";});
+svg.addEventListener("click",e=>{if(moved>3){e.stopPropagation();e.preventDefault();}},true);
+document.getElementById("zin").onclick=()=>zoomAt(340,260,1.25);
+document.getElementById("zout").onclick=()=>zoomAt(340,260,1/1.25);
+document.getElementById("zfit").onclick=fit;
+document.getElementById("z100").onclick=()=>{const w=wrap.clientWidth||680;k=1;tx=w/2-300;ty=-40;apply();};
+fit();
+addEventListener("resize",fit);
+</script>

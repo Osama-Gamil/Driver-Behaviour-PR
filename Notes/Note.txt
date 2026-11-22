@@ -1,0 +1,12 @@
+Why Low-Spec Microcontrollers Cannot Talk Directly to Kafka
+Protocol Overhead & Memory Footprint
+Kafka clients require heavy client libraries, TCP batching buffers, and complex protocol parsers that easily exceed the RAM and Flash limits of low-cost microcontrollers (e.g., STM32, ESP32, or Nordic nRF modules).
+
+Cellular Data Costs
+Kafka's wire protocol includes significant metadata framing and heartbeat overhead. In contrast, MQTT has a 2-byte packet header, dramatically reducing cellular data usage across a fleet of thousands of vehicles.
+
+Unstable Cellular Networks
+Vehicles constantly drive through dead zones, tunnels, and cell-tower handovers. When thousands of Kafka clients rapidly drop and reconnect, it triggers resource-heavy socket churn and metadata updates on Kafka brokers. MQTT brokers handle persistent client sessions and frequent TCP dropouts with minimal overhead.
+
+Connection Scale
+Kafka is designed for hundreds of high-throughput server connections, not 100,000 persistent, idle TCP sockets. Dedicated MQTT brokers (like EMQX or HiveMQ) are built specifically to hold open millions of concurrent, lightweight device connections.

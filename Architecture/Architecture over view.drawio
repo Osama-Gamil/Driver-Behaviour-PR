@@ -1,0 +1,142 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="eqQOhr8kVQHrODTQA-WN">
+    <mxGraphModel dx="3029" dy="1812" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="580" width="760" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;Layer 1 : Telemetry Domain&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="305" x="70" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;dashed=1;dashPattern=8 8;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="90" width="520" x="170" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;labelBackgroundColor=none;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b&gt;Data source&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="110" x="170" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;labelBackgroundColor=none;" value="Simulated Vehicles&lt;br&gt;(used for scalability)&amp;nbsp;" vertex="1">
+          <mxGeometry height="55" width="136" x="300" y="97.5" as="geometry" />
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;labelBackgroundColor=none;" value="Real OBD Data&lt;br&gt;(future work)" vertex="1">
+          <mxGeometry height="55" width="136" x="490" y="97.5" as="geometry" />
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;dashed=1;dashPattern=8 8;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="290" width="520" x="170" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-8" edge="1" parent="1" source="A9WBvxLxAj90YRbZ1_0Z-3" style="endArrow=classic;html=1;rounded=0;defaultLabelBackgroundColor=page;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=default;" target="A9WBvxLxAj90YRbZ1_0Z-12" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="425" y="200.0045454545455" as="sourcePoint" />
+            <mxPoint x="325" y="204.55" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-10" connectable="0" parent="A9WBvxLxAj90YRbZ1_0Z-8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;" value="One Json Msg per car every Sec" vertex="1">
+          <mxGeometry relative="1" x="0.0133" y="3" as="geometry">
+            <mxPoint x="-3" y="-31" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;labelBackgroundColor=none;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b&gt;Ingestion&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="110" x="190" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="N-own-ingest" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;rounded=0;fontSize=12;fontStyle=2;labelBackgroundColor=none;" value="Own design (not from the papers)" vertex="1">
+          <mxGeometry height="24" width="200" x="480" y="232" as="geometry" />
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-14" edge="1" parent="1" source="A9WBvxLxAj90YRbZ1_0Z-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;fontColor=default;" target="A9WBvxLxAj90YRbZ1_0Z-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;labelBackgroundColor=none;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;MQTT Broker (EMQX Broker)&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="336" x="262" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="8LjoA9YiSq1YRo73to7H-13" edge="1" parent="1" source="A9WBvxLxAj90YRbZ1_0Z-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;fontColor=default;" target="8LjoA9YiSq1YRo73to7H-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="354" y="410" />
+              <mxPoint x="354" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A9WBvxLxAj90YRbZ1_0Z-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;labelBackgroundColor=none;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Kafka&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="336" x="262" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="8LjoA9YiSq1YRo73to7H-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;labelBackgroundColor=none;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;TimescaleDB&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="55" width="168" x="270" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="N-steward" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=12;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Data Quality Steward (agent)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;Drops zero speeds, flags gaps and impossible jumps&lt;br&gt;&lt;i&gt;Study: Mohammadnazar et al. (2021) remove zero speeds and outliers&lt;br&gt;Own: doing it as an agent&lt;/i&gt;" vertex="1">
+          <mxGeometry height="85" width="336" x="262" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="N-e-ts-steward" edge="1" parent="1" source="8LjoA9YiSq1YRo73to7H-2" style="endArrow=classic;html=1;rounded=0;defaultLabelBackgroundColor=page;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.274;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=default;" target="N-steward" value="rows per car per second">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8LjoA9YiSq1YRo73to7H-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;Layer 2: Driving analysis&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="305" x="60" y="665" as="geometry" />
+        </mxCell>
+        <mxCell id="8LjoA9YiSq1YRo73to7H-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="500" width="760" x="40" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="8LjoA9YiSq1YRo73to7H-12" parent="1" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;labelBackgroundColor=none;" value="&lt;span style=&quot;background-color: light-dark(rgb(23, 28, 36), rgb(0, 0, 0));&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Based on&amp;nbsp;&lt;br&gt;&lt;span style=&quot;font-family: Inter, &amp;quot;Segoe UI&amp;quot;, system-ui, sans-serif; text-align: start;&quot;&gt;Mohammadnazar et al. (2021), temporal driving volatility.&lt;/span&gt;&lt;/font&gt;&lt;/b&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="195" x="60" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="N-b5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=12;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Windows and volatility features&lt;/font&gt;&lt;/b&gt;&lt;br&gt;Acceleration = Δspeed ÷ (3.6 × Δt), windows of 10–30 s&lt;br&gt;Speed-Cv, Speed-Dmean, Speed-Qcv, Speed-Vf, Accel-Dmean&lt;br&gt;&lt;i&gt;Study: Mohammadnazar et al. (2021)&lt;br&gt;Own: longer window, no lateral measure&lt;/i&gt;" vertex="1">
+          <mxGeometry height="110" width="336" x="262" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="N-b6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=12;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Classification&lt;/font&gt;&lt;/b&gt;&lt;br&gt;Standardize, then K-means with 3 clusters.&lt;br&gt;Silhouette check for k = 2 to 5, &lt;br&gt;centers frozen for new windows&lt;br&gt;&lt;i&gt;Study: Mohammadnazar et al. (2021); &lt;br&gt;Kostopoulos et al. (2024)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="110" width="336" x="262" y="915" as="geometry" />
+        </mxCell>
+        <mxCell id="N-b7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=12;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Driving score&lt;/font&gt;&lt;/b&gt;&lt;br&gt;Mean of window labels, then (s − 1) × 50 = score 0 to 100&lt;br&gt;Five bands, Very Poor to Excellent&lt;br&gt;&lt;i&gt;Study: Mohammadnazar et al. (2021), Fig. 2-9&lt;br&gt;Own: 0 to 100 rescale, three driver classes&lt;/i&gt;" vertex="1">
+          <mxGeometry height="100" width="336" x="262" y="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="N-val" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;dashed=1;dashPattern=8 8;fontSize=11;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;Validation&lt;/font&gt;&lt;/b&gt;&lt;br&gt;(side check)&lt;br&gt;Harsh-event cross-check, labeled OBD trips: confusion matrix, F1&lt;br&gt;&lt;i&gt;Study: Ameen et al. (2021); Sağbaş (2026)&lt;br&gt;Dataset details not yet verified&lt;/i&gt;" vertex="1">
+          <mxGeometry height="190" width="160" x="60" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="N-e-steward-b5" edge="1" parent="1" source="N-steward" style="endArrow=classic;html=1;rounded=0;defaultLabelBackgroundColor=page;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=default;" target="N-b5" value="clean 1 Hz speed series per car">
+          <mxGeometry relative="1" x="-0.2308" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="N-e-b5-b6" edge="1" parent="1" source="N-b5" style="endArrow=classic;html=1;rounded=0;defaultLabelBackgroundColor=page;fontSize=12;fontColor=default;" target="N-b6" value="5 numbers per window">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="N-e-b6-b7" edge="1" parent="1" source="N-b6" style="endArrow=classic;html=1;rounded=0;defaultLabelBackgroundColor=page;fontSize=12;fontColor=default;" target="N-b7" value="Label per window: Calm 3, Normal 2, Aggressive 1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="N-e-b6-val" edge="1" parent="1" source="N-b6" style="endArrow=classic;html=1;rounded=0;dashed=1;defaultLabelBackgroundColor=page;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.105;entryDx=0;entryDy=0;fontSize=11;fontColor=default;" target="N-val" value="checks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="N-e-b7-val" edge="1" parent="1" source="N-b7" style="endArrow=classic;html=1;rounded=0;dashed=1;defaultLabelBackgroundColor=page;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.895;entryDx=0;entryDy=0;fontSize=11;fontColor=default;" target="N-val" value="checks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8LjoA9YiSq1YRo73to7H-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 21px;&quot;&gt;Layer 3: Dashboard &amp;amp; Feedback&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="300" x="60" y="1225" as="geometry" />
+        </mxCell>
+        <mxCell id="8LjoA9YiSq1YRo73to7H-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;labelBackgroundColor=none;" value="" vertex="1">
+          <mxGeometry height="345" width="760" x="40" y="1270" as="geometry" />
+        </mxCell>
+        <mxCell id="N-b9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=12;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Coach agent and gamification&lt;/font&gt;&lt;/b&gt;&lt;br&gt;Scorecard after each trip, challenges and streaks, peer comparison, self-set goals&lt;br&gt;&lt;i&gt;Study: Kontaxi (2025), scorecard and competitions worked best; gains faded after feedback stopped&lt;br&gt;Own: Self-Determination Theory as the design frame&lt;/i&gt;" vertex="1">
+          <mxGeometry height="120" width="336" x="262" y="1320" as="geometry" />
+        </mxCell>
+        <mxCell id="N-b10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fontSize=12;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Dashboard (Grafana)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;Score trend, band, braking and acceleration sub-scores, leaderboard&lt;br&gt;&lt;i&gt;Own design, shows the score as Kontaxi&#39;s scorecard feature&lt;/i&gt;" vertex="1">
+          <mxGeometry height="90" width="336" x="262" y="1485" as="geometry" />
+        </mxCell>
+        <mxCell id="N-mon" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;dashed=1;dashPattern=8 8;fontSize=11;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;Model Monitor agent&lt;/font&gt;&lt;/b&gt;&lt;br&gt;(extension)&lt;br&gt;Watches the mix of Calm, Normal and Aggressive windows for drift&lt;br&gt;&lt;i&gt;Own design&lt;/i&gt;" vertex="1">
+          <mxGeometry height="130" width="150" x="636" y="1320" as="geometry" />
+        </mxCell>
+        <mxCell id="N-e-b7-b9" edge="1" parent="1" source="N-b7" style="endArrow=classic;html=1;rounded=0;defaultLabelBackgroundColor=page;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;fontColor=default;" target="N-b9" value="Score, band and class per driver">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="N-e-b9-b10" edge="1" parent="1" source="N-b9" style="endArrow=classic;html=1;rounded=0;defaultLabelBackgroundColor=page;fontSize=12;fontColor=default;" target="N-b10" value="Alerts, badges, leaderboard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="N-e-mon-b6" edge="1" parent="1" source="N-mon" style="edgeStyle=orthogonalEdgeStyle;endArrow=classic;html=1;rounded=0;dashed=1;defaultLabelBackgroundColor=page;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;fontColor=default;" target="N-b6" value="re-training trigger">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="N-legend" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=top;rounded=0;fontSize=12;labelBackgroundColor=none;" value="&lt;b&gt;Legend:&lt;/b&gt; solid box = block in the main flow; dashed box = side check or extension. &quot;Study&quot; = published source the block follows. &quot;Own&quot; = engineering choice made for this project.&lt;br&gt;&lt;br&gt;&lt;b&gt;Sources:&lt;/b&gt; Mohammadnazar, Arvin and Khattak (2021), Transportation Research Part C, 122, 102917. Kostopoulos et al. (2024), Sustainability, 16(14), 6151. Kontaxi (2025), PhD thesis, NTUA (English summary). Ameen et al. (2021) and Sağbaş (2026): cited from earlier research, not re-read." vertex="1">
+          <mxGeometry height="110" width="760" x="40" y="1640" as="geometry" />
+        </mxCell>
+        <mxCell id="l5i20zJQrCjp0tuegTyK-1" parent="1" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;labelBackgroundColor=none;" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;div dir=&quot;ltr&quot;&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Measure&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Equation&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;What it reflects&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Speed-Cv&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Cv = (standard deviation ÷ |x̄|) × 100&lt;/td&gt;&lt;td&gt;How much speed varies &lt;strong&gt;compared with the driver’s usual speed&lt;/strong&gt;. 10 km/h of variation matters more at 30 km/h than at 120 km/h.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Speed-Dmean&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Dmean = (1/n) × Σ |xᵢ − x̄|&lt;/td&gt;&lt;td&gt;The &lt;strong&gt;typical distance from the average speed&lt;/strong&gt;, in km/h.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Speed-Qcv&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Qcv = ((Q3 − Q1) ÷ (Q3 + Q1)) × 100&lt;/td&gt;&lt;td&gt;The spread of the &lt;strong&gt;middle half&lt;/strong&gt; of the readings. Rare spikes are ignored, so it shows the regular variability.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Speed-Vf&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;rᵢ = ln(xᵢ ÷ xᵢ₋₁) × 100, then Vf = standard deviation of the rᵢ&lt;/td&gt;&lt;td&gt;How large and how &lt;strong&gt;sudden the second-to-second changes&lt;/strong&gt; are. Frequent sharp speeding up and slowing down gives a high value. It works only for speed.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Accel-Dmean&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;The same Dmean equation, applied to &lt;strong&gt;acceleration&lt;/strong&gt; (m/s²)&lt;/td&gt;&lt;td&gt;How &lt;strong&gt;hard&lt;/strong&gt; the driver accelerates and brakes compared with their own average.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;br&gt;&lt;p dir=&quot;ltr&quot;&gt;In all five, a &lt;strong&gt;higher value means less stable driving&lt;/strong&gt;.&lt;/p&gt;&lt;/h1&gt;" vertex="1">
+          <mxGeometry height="510" width="2050" x="980" y="185" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
