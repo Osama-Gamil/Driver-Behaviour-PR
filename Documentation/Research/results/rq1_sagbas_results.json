@@ -1,0 +1,519 @@
+{
+  "n_windows": 1600,
+  "n_sessions": 26,
+  "windows_per_label": {
+    "1": 235,
+    "2": 344,
+    "3": 281,
+    "4": 114,
+    "5": 231,
+    "6": 395
+  },
+  "sessions_per_label": {
+    "1": 2,
+    "2": 5,
+    "3": 5,
+    "4": 4,
+    "5": 8,
+    "6": 2
+  },
+  "A_reference_ameen": {
+    "accuracy": 0.336046511627907,
+    "macro_f1": 0.27059332209882453,
+    "confusion": [
+      [
+        222,
+        13,
+        0
+      ],
+      [
+        301,
+        41,
+        2
+      ],
+      [
+        216,
+        39,
+        26
+      ]
+    ],
+    "labels": [
+      "calm",
+      "normal",
+      "aggressive"
+    ]
+  },
+  "B_volatility_clusters": {
+    "accuracy": 0.3127906976744186,
+    "macro_f1": 0.24423794721683056,
+    "confusion": [
+      [
+        214,
+        6,
+        15
+      ],
+      [
+        315,
+        8,
+        21
+      ],
+      [
+        231,
+        3,
+        47
+      ]
+    ],
+    "labels": [
+      "calm",
+      "normal",
+      "aggressive"
+    ],
+    "adjusted_rand_index": 0.007247471557130183,
+    "silhouette_k3": 0.7293225971005037,
+    "silhouette_by_k": {
+      "2": 0.7059492762575192,
+      "3": 0.7293225971005037,
+      "4": 0.6187127141941774,
+      "5": 0.570128652149082
+    }
+  },
+  "B2_volatility_clusters_imu": {
+    "accuracy": 0.336046511627907,
+    "macro_f1": 0.31807578367655887,
+    "confusion": [
+      [
+        163,
+        66,
+        6
+      ],
+      [
+        247,
+        79,
+        18
+      ],
+      [
+        129,
+        105,
+        47
+      ]
+    ],
+    "labels": [
+      "calm",
+      "normal",
+      "aggressive"
+    ],
+    "adjusted_rand_index": 0.032089299803114875,
+    "silhouette_k3": 0.25585270794053216
+  },
+  "C_supervised_ablation": {
+    "speed only (reference view)": {
+      "accuracy_mean": 0.5879844961240309,
+      "accuracy_sd": 0.003952728305110718,
+      "macro_f1_mean": 0.5769751544095382,
+      "macro_f1_sd": 0.004169750981396221,
+      "confusion_seed0": [
+        [
+          85,
+          144,
+          6
+        ],
+        [
+          73,
+          200,
+          71
+        ],
+        [
+          7,
+          58,
+          216
+        ]
+      ],
+      "labels": [
+        "calm",
+        "normal",
+        "aggressive"
+      ]
+    },
+    "speed + engine (all OBD)": {
+      "accuracy_mean": 0.7829457364341086,
+      "accuracy_sd": 0.0038370135413223413,
+      "macro_f1_mean": 0.7811937794363534,
+      "macro_f1_sd": 0.004074224543705931,
+      "confusion_seed0": [
+        [
+          154,
+          81,
+          0
+        ],
+        [
+          37,
+          268,
+          39
+        ],
+        [
+          6,
+          28,
+          247
+        ]
+      ],
+      "labels": [
+        "calm",
+        "normal",
+        "aggressive"
+      ]
+    },
+    "OBD + motion (friction circle)": {
+      "accuracy_mean": 0.7643410852713178,
+      "accuracy_sd": 0.00539860010743568,
+      "macro_f1_mean": 0.7610118730596508,
+      "macro_f1_sd": 0.005484128907195067,
+      "confusion_seed0": [
+        [
+          144,
+          91,
+          0
+        ],
+        [
+          33,
+          272,
+          39
+        ],
+        [
+          0,
+          35,
+          246
+        ]
+      ],
+      "labels": [
+        "calm",
+        "normal",
+        "aggressive"
+      ]
+    },
+    "OBD + motion + context (Power Model)": {
+      "accuracy_mean": 0.763953488372093,
+      "accuracy_sd": 0.0018988292579714503,
+      "macro_f1_mean": 0.759781155880836,
+      "macro_f1_sd": 0.0017568882805414417,
+      "confusion_seed0": [
+        [
+          137,
+          98,
+          0
+        ],
+        [
+          34,
+          271,
+          39
+        ],
+        [
+          0,
+          32,
+          249
+        ]
+      ],
+      "labels": [
+        "calm",
+        "normal",
+        "aggressive"
+      ]
+    }
+  },
+  "C_gradient_boosting_full": {
+    "accuracy_mean": 0.7290697674418606,
+    "accuracy_sd": 1.1102230246251565e-16,
+    "macro_f1_mean": 0.7238652839517781,
+    "macro_f1_sd": 0.0,
+    "confusion_seed0": [
+      [
+        124,
+        111,
+        0
+      ],
+      [
+        30,
+        272,
+        42
+      ],
+      [
+        0,
+        50,
+        231
+      ]
+    ],
+    "labels": [
+      "calm",
+      "normal",
+      "aggressive"
+    ]
+  },
+  "D_leakage_random_split": {
+    "accuracy": 0.8906976744186047,
+    "macro_f1": 0.8927764673120709,
+    "confusion": [
+      [
+        212,
+        23,
+        0
+      ],
+      [
+        29,
+        295,
+        20
+      ],
+      [
+        0,
+        22,
+        259
+      ]
+    ],
+    "labels": [
+      "calm",
+      "normal",
+      "aggressive"
+    ]
+  },
+  "feature_importance_top12": {
+    "maf_max": 0.1187,
+    "rpm_max": 0.0899,
+    "maf_mean": 0.0795,
+    "map_max": 0.0713,
+    "rpm_mean": 0.06,
+    "map_mean": 0.0538,
+    "speed_max": 0.0325,
+    "a_lat_abs_g_max": 0.0292,
+    "a_lat_abs_g_mean": 0.029,
+    "map_sd": 0.0251,
+    "load_max": 0.024,
+    "power_log_rr": 0.0217
+  },
+  "convergent_validity": {
+    "calm": {
+      "windows": 235,
+      "share_with_harsh_event": 0.0,
+      "friction_u_max_mean": 0.146,
+      "a_h_g_max_mean": 0.117,
+      "obd_a_abs_max_ms2_mean": 0.811,
+      "friction_u_max_median": 0.138,
+      "power_rr_median": 0.122,
+      "speed_ratio_max_median": 0.627,
+      "vol_ah_cv_median": 0.564
+    },
+    "normal": {
+      "windows": 344,
+      "share_with_harsh_event": 0.006,
+      "friction_u_max_mean": 0.18,
+      "a_h_g_max_mean": 0.144,
+      "obd_a_abs_max_ms2_mean": 1.001,
+      "friction_u_max_median": 0.17,
+      "power_rr_median": 0.313,
+      "speed_ratio_max_median": 0.782,
+      "vol_ah_cv_median": 0.548
+    },
+    "aggressive": {
+      "windows": 281,
+      "share_with_harsh_event": 0.089,
+      "friction_u_max_mean": 0.244,
+      "a_h_g_max_mean": 0.195,
+      "obd_a_abs_max_ms2_mean": 1.55,
+      "friction_u_max_median": 0.216,
+      "power_rr_median": 0.837,
+      "speed_ratio_max_median": 1.0,
+      "vol_ah_cv_median": 0.566
+    }
+  },
+  "E_six_class": {
+    "speed only": {
+      "accuracy_mean": 0.4227083333333333,
+      "accuracy_sd": 0.0011785113019775802,
+      "macro_f1_mean": 0.39487176812019514,
+      "macro_f1_sd": 0.0017839079721966627,
+      "confusion_seed0": [
+        [
+          51,
+          84,
+          4,
+          25,
+          13,
+          58
+        ],
+        [
+          47,
+          177,
+          68,
+          15,
+          16,
+          21
+        ],
+        [
+          6,
+          46,
+          201,
+          0,
+          16,
+          12
+        ],
+        [
+          17,
+          1,
+          0,
+          28,
+          35,
+          33
+        ],
+        [
+          10,
+          12,
+          16,
+          47,
+          92,
+          54
+        ],
+        [
+          74,
+          47,
+          22,
+          68,
+          58,
+          126
+        ]
+      ],
+      "labels": [
+        "very_calm",
+        "normal",
+        "aggressive",
+        "eco_constant",
+        "non_eco_constant",
+        "calm_eco_highway"
+      ]
+    },
+    "speed + engine": {
+      "accuracy_mean": 0.651875,
+      "accuracy_sd": 0.0013501543121683269,
+      "macro_f1_mean": 0.6644620471809427,
+      "macro_f1_sd": 0.00179823742350801,
+      "confusion_seed0": [
+        [
+          86,
+          56,
+          0,
+          5,
+          0,
+          88
+        ],
+        [
+          33,
+          255,
+          33,
+          0,
+          1,
+          22
+        ],
+        [
+          5,
+          29,
+          225,
+          1,
+          20,
+          1
+        ],
+        [
+          4,
+          0,
+          0,
+          85,
+          0,
+          25
+        ],
+        [
+          0,
+          2,
+          12,
+          0,
+          216,
+          1
+        ],
+        [
+          136,
+          52,
+          0,
+          30,
+          2,
+          175
+        ]
+      ],
+      "labels": [
+        "very_calm",
+        "normal",
+        "aggressive",
+        "eco_constant",
+        "non_eco_constant",
+        "calm_eco_highway"
+      ]
+    },
+    "all signals": {
+      "accuracy_mean": 0.6945833333333334,
+      "accuracy_sd": 0.003118047822311601,
+      "macro_f1_mean": 0.7061002926087151,
+      "macro_f1_sd": 0.0026613148426170323,
+      "confusion_seed0": [
+        [
+          117,
+          72,
+          0,
+          8,
+          0,
+          38
+        ],
+        [
+          34,
+          270,
+          33,
+          0,
+          2,
+          5
+        ],
+        [
+          0,
+          34,
+          225,
+          1,
+          20,
+          1
+        ],
+        [
+          9,
+          0,
+          0,
+          92,
+          0,
+          13
+        ],
+        [
+          0,
+          2,
+          12,
+          0,
+          216,
+          1
+        ],
+        [
+          129,
+          46,
+          1,
+          27,
+          2,
+          190
+        ]
+      ],
+      "labels": [
+        "very_calm",
+        "normal",
+        "aggressive",
+        "eco_constant",
+        "non_eco_constant",
+        "calm_eco_highway"
+      ]
+    }
+  }
+}

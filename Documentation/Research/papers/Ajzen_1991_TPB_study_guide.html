@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ajzen (1991) Study Guide</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #1d2430; }
+  h1 { font-size: 19pt; margin: 0 0 4px; color: #12355b; }
+  h2 { font-size: 13pt; color: #12355b; border-bottom: 2px solid #d6e2f0; padding-bottom: 3px; margin-top: 20px; }
+  h3 { font-size: 11pt; margin: 14px 0 4px; }
+  .sub { color: #5a6577; margin-bottom: 10px; }
+  .box { border: 1px solid #d6e2f0; background: #f5f9fd; border-radius: 6px; padding: 8px 12px; margin: 10px 0; }
+  .warn { border-color: #f0d9a8; background: #fdf8ec; }
+  .key { border-color: #bfe0c8; background: #f1faf3; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 9.8pt; }
+  th, td { border: 1px solid #ccd6e3; padding: 5px 7px; vertical-align: top; text-align: left; }
+  th { background: #e9f0f8; }
+  .formula { font-family: Cambria, "Times New Roman", serif; font-size: 11.5pt; text-align: center; margin: 8px 0; }
+  .tag { display: inline-block; font-size: 8pt; font-weight: 600; padding: 1px 6px; border-radius: 9px; }
+  .v { background: #d9f2df; color: #1d6b33; }
+  .m { background: #fbe9c8; color: #8a5a00; }
+  .diagram { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 10px 0; }
+  .col { display: flex; flex-direction: column; gap: 6px; }
+  .node { border: 1.5px solid #12355b; border-radius: 6px; padding: 6px 10px; text-align: center; background: #fff; min-width: 130px; }
+  .node small { display: block; color: #5a6577; }
+  .arrow { font-size: 20pt; color: #12355b; }
+  ol li, ul li { margin-bottom: 3px; }
+  .pb { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<h1>Ajzen (1991): The Theory of Planned Behavior</h1>
+<div class="sub">Study guide for the Driver Behaviour graduation project · prepared November 2026</div>
+
+<div class="box">
+<b>Full citation.</b> Ajzen, I. (1991). The theory of planned behavior. <i>Organizational Behavior and Human Decision Processes</i>, 50(2), 179–211. DOI: 10.1016/0749-5978(91)90020-T<br>
+<b>Getting the full paper.</b> Elsevier journal (paywalled). Use the Cairo University library access via the DOI above. Copies are also widely shared on author and course pages.
+</div>
+
+<div class="box warn">
+<b>How to read this guide.</b> My environment could not open the paper itself, so this guide is written from my knowledge of a very well-known paper, not from a fresh reading. The content is the standard, widely taught account, but you must check it against the original before you quote it.
+<span class="tag v">CHECK</span> marks exact numbers or wording you must confirm on the page before using them in the thesis or the slides. Slide 68 of the deck already says the original was not read; reading it is the first thing the doctor will expect.
+</div>
+
+<h2>1. Why this paper matters</h2>
+<ul>
+  <li>It is one of the most cited papers in all of social science (the doctor quoted about 192K citations). Most psychology studies of risky driving (speeding, drink driving, phone use, seat belts) use it as their framework.</li>
+  <li>It gives a <b>causal chain from beliefs to behaviour</b>. That chain is the "solid foundation" the doctor wants under the ML model. The ML measures the <i>behaviour</i>; TPB explains <i>why</i> it happens and <i>what can change it</i>.</li>
+</ul>
+
+<h2>2. Where it comes from</h2>
+<p>TPB extends the <b>Theory of Reasoned Action</b> (Fishbein &amp; Ajzen, 1975; Ajzen &amp; Fishbein, 1980). In that theory, behaviour follows from <b>intention</b>, and intention follows from <b>attitude</b> and <b>subjective norm</b>. Reasoned Action works only for behaviours under full <i>volitional control</i>: the person can simply decide to do them. Many behaviours are not like that; they also need skill, time, opportunity or other people. Ajzen therefore added a third factor, <b>perceived behavioral control (PBC)</b>. This is the "planned" extension.</p>
+
+<h2>3. The model</h2>
+<div class="diagram">
+  <div class="col">
+    <div class="node"><b>Attitude</b><small>Is the behaviour good or bad for me?</small></div>
+    <div class="node"><b>Subjective norm</b><small>Do important others want me to?</small></div>
+    <div class="node"><b>Perceived behavioral control</b><small>Can I do it? Is it up to me?</small></div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="node"><b>Intention</b><small>How hard I plan to try</small></div>
+  <div class="arrow">→</div>
+  <div class="node"><b>Behaviour</b><small>What I actually do</small></div>
+</div>
+<p style="text-align:center;color:#5a6577;font-size:9pt">PBC also has a direct arrow to behaviour (see section 5).</p>
+
+<div class="formula">Intention = w₁·Attitude + w₂·Subjective norm + w₃·PBC</div>
+<div class="formula">Behaviour = w₄·Intention + w₅·PBC</div>
+<p>The weights are <b>not fixed</b>. They are estimated by regression for each behaviour and population. For one behaviour attitude may dominate; for another, social pressure may. This is why you cannot borrow weights from a paper. You estimate them, which is what an SEM replication does.</p>
+
+<h3>The three determinants</h3>
+<table>
+<tr><th>Construct</th><th>Ajzen's meaning</th><th>Driving example (speeding)</th></tr>
+<tr><td>Attitude toward the behaviour</td><td>The person's overall positive or negative evaluation of performing the behaviour</td><td>"Speeding on this road is useful / exciting / harmful"</td></tr>
+<tr><td>Subjective norm</td><td>Perceived social pressure to perform or not perform it</td><td>"People important to me think I should keep to the limit"</td></tr>
+<tr><td>Perceived behavioral control</td><td>Perceived ease or difficulty of performing it, reflecting past experience and expected obstacles</td><td>"Keeping to the limit is easy for me / up to me"</td></tr>
+</table>
+
+<h2>4. PBC is not locus of control</h2>
+<ul>
+  <li><b>Rotter's locus of control</b> is a <i>general, stable</i> belief that outcomes depend on one's own actions. It is the same across situations.</li>
+  <li><b>PBC</b> is <i>specific</i> to one behaviour in one context and can change from one behaviour to the next. Ajzen links it most closely to <b>Bandura's self-efficacy</b> (confidence in one's ability to perform a specific behaviour).</li>
+</ul>
+
+<h2>5. When PBC predicts behaviour directly</h2>
+<p>Ajzen gives two reasons for the direct PBC → behaviour arrow:</p>
+<ol>
+  <li><b>Motivational.</b> With intention held constant, a person who feels more in control tries harder and persists longer, so they succeed more often.</li>
+  <li><b>Proxy for actual control.</b> PBC can stand in for real control, but only to the extent that the perception is <b>accurate</b>. When the person lacks information or the situation is new, PBC predicts behaviour poorly.</li>
+</ol>
+<p>Accurate prediction also needs three conditions:</p>
+<ol>
+  <li>Intention and PBC are measured to <b>match the behaviour</b> (compatibility, section 9).</li>
+  <li>They stay <b>stable</b> between the time they are measured and the time the behaviour happens.</li>
+  <li>PBC is <b>realistic</b>.</li>
+</ol>
+
+<h2>6. The evidence Ajzen reviewed</h2>
+<p>The paper reviews earlier empirical studies across many behaviours (not driving-specific). Its headline findings:</p>
+<ul>
+  <li>Attitude, subjective norm and PBC together predict <b>intention</b> with high accuracy. The average multiple correlation is about <b>R ≈ .71</b> <span class="tag v">CHECK</span></li>
+  <li>Intention and PBC together predict <b>behaviour</b> with an average multiple correlation of about <b>R ≈ .51</b> <span class="tag v">CHECK</span></li>
+  <li>Adding PBC improves prediction beyond attitude and subjective norm, which is the empirical case for the "planned" extension.</li>
+</ul>
+<p>R = .51 means about 26% of behaviour variance explained (R² = .51²); R = .71 means about 50% of intention variance. Compare this with the Somoray et al. (2024) driving meta-analysis in the companion guide.</p>
+
+<h2 class="pb">7. Beliefs: the deeper layer (expectancy-value)</h2>
+<p>Each of the three determinants rests on a set of <b>salient beliefs</b>, the beliefs that come to mind most readily:</p>
+<table>
+<tr><th>Determinant</th><th>Belief formula</th><th>Meaning</th></tr>
+<tr><td>Attitude</td><td class="formula" style="font-size:10.5pt">A ∝ Σ bᵢ·eᵢ</td><td>bᵢ = belief that the behaviour leads to outcome i; eᵢ = evaluation of that outcome</td></tr>
+<tr><td>Subjective norm</td><td class="formula" style="font-size:10.5pt">SN ∝ Σ nⱼ·mⱼ</td><td>nⱼ = belief that referent j wants me to do it; mⱼ = motivation to comply with j</td></tr>
+<tr><td>PBC</td><td class="formula" style="font-size:10.5pt">PBC ∝ Σ cₖ·pₖ</td><td>cₖ = belief that control factor k will be present; pₖ = power of factor k to help or hinder</td></tr>
+</table>
+<p><b>Why this matters for interventions.</b> To change behaviour you change <i>beliefs</i>. A feedback system cannot change "attitude" directly, but it can change a specific belief such as "harsh braking does not save time". That is the bridge to the gamification / Coach design.</p>
+<p><b>The scaling problem.</b> Ajzen discusses a technical issue: multiplying two scores (b × e) gives results that depend on whether the scales are scored unipolar (1 to 7) or bipolar (−3 to +3). The correlation of the product with other measures changes with that arbitrary choice. Belief-based composites therefore often correlate only moderately with the direct measures. Mention this as a measurement limitation if you ever build a belief-based questionnaire.</p>
+
+<h2>8. Is the theory complete? Past behaviour and extra predictors</h2>
+<ul>
+  <li><b>Past behaviour.</b> Past behaviour often predicts future behaviour beyond the TPB variables. Ajzen treats this as a test of the theory's <i>sufficiency</i>. He argues that past behaviour (habit) is not itself a psychological explanation; its residual effect means something relevant is still unmeasured.</li>
+  <li><b>Open to additions.</b> The theory accepts new predictors <i>if</i> they explain a significant share of variance beyond the three determinants. Examples discussed include <b>personal / moral norms</b> (a feeling of moral obligation) and <b>self-identity</b>. This is why so many driving studies use an "extended TPB": they add, for example, normlessness, risk perception, descriptive norms or past behaviour (see slide 30 of the deck).</li>
+</ul>
+
+<h2>9. Measuring TPB correctly</h2>
+<p>This comes from Ajzen's questionnaire-construction guidance on his TPB website, which is a separate source from the 1991 paper. Read it before you design any questionnaire.</p>
+<ul>
+  <li><b>Compatibility (TACT).</b> Define the behaviour by <b>T</b>arget, <b>A</b>ction, <b>C</b>ontext and <b>T</b>ime, and measure every construct at exactly that level. Example: "driving more than 10 km/h above the limit (action) on urban roads in Cairo (context) during the next 4 weeks (time)". A vague behaviour gives weak correlations.</li>
+  <li><b>Elicitation study first.</b> Ask a small sample open questions (advantages and disadvantages, who approves or disapproves, what makes it easy or hard) to find the <i>salient</i> beliefs. Then write closed items from the most frequent answers.</li>
+  <li><b>Direct measures.</b> Use several 7-point semantic-differential or Likert items per construct (for example, attitude: bad–good, harmful–beneficial, unpleasant–pleasant). Check internal consistency with Cronbach's α or composite reliability.</li>
+  <li><b>Behaviour measured later.</b> Measure the behaviour <i>after</i> the questionnaire (prospective design). This is where OBD data fits: it gives an <b>objective</b> behaviour measure instead of self-report.</li>
+</ul>
+
+<h2>10. What this means for our project</h2>
+<table>
+<tr><th>TPB element</th><th>Where it appears in the project</th></tr>
+<tr><td>Behaviour</td><td><b>Measured objectively</b> from OBD/GPS: harsh-braking rate, overspeed episodes, driving class. Define it with TACT so the theory applies.</td></tr>
+<tr><td>Intention, attitude, subjective norm, PBC</td><td>Not observable from OBD. They need a short questionnaire (future real-driver pilot), or an open TPB dataset for a methodological replication (an SEM).</td></tr>
+<tr><td>Attitude beliefs (bᵢ·eᵢ)</td><td>Coach messages that correct outcome beliefs, e.g. "your harsh braking on this road saved 0 s on average".</td></tr>
+<tr><td>Subjective norm</td><td>Peer comparison / leaderboard in the gamified feedback (normative information).</td></tr>
+<tr><td>PBC</td><td>Achievable challenges and concrete tips ("keep a 3 s gap on Ring Road"), which build perceived control.</td></tr>
+</table>
+<div class="box key">
+<b>One sentence for the slides.</b> "TPB explains <i>why</i> a driver behaves riskily (beliefs → intention → behaviour). Our system measures that <i>behaviour</i> objectively from OBD data instead of self-report, and our feedback design targets the three belief groups TPB identifies."
+</div>
+
+<h2>11. Questions the doctor may ask</h2>
+<table>
+<tr><th>Question</th><th>Short answer</th></tr>
+<tr><td>Why TPB and not Reasoned Action?</td><td>Driving behaviours are not fully volitional (traffic, skill, time pressure), which is exactly what PBC adds.</td></tr>
+<tr><td>Can OBD measure TPB?</td><td>OBD measures the <i>behaviour</i> node only. The belief nodes need self-report. Combining the two (questionnaire plus OBD) answers the main criticism of TPB driving studies, which is self-reported behaviour.</td></tr>
+<tr><td>What is the intention–behaviour gap?</td><td>Intention explains only part of behaviour (R ≈ .51 on average in Ajzen's review). The direct PBC path and habit (past behaviour) account for some of the rest.</td></tr>
+<tr><td>Is the theory falsifiable?</td><td>Yes: it predicts which paths are significant and how much variance is explained. These are tested statistically, typically with SEM.</td></tr>
+</table>
+
+</body>
+</html>
